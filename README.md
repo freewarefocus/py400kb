@@ -47,7 +47,7 @@ It also supports recording and playing back keyboard and mouse macro files.
   SB 3.0 Male to Male Cable 3Ft,USB to USB Cable with Gold-Plated Connector
   www.amazon.com/Jelly-Tang-USB-3-0-3Ft/dp/B07KJFWYXF
 
-  For testing I used the above cables & adapters along with an official Raspberry Pi 45 watt USB C power adapter & a Pi400 & a Pi500+. Although this combination of equipment worked fine for me, I am not responsible for damage caused by attempting to turn your Pi into an external keyboard. Always check adapters and cables to make sure they are providing the correct power to the correct places.
+  For testing I used the above cables & adapters along with an official Raspberry Pi 45 watt USB C power adapter and a Pi400 & a Pi500+. Although this combination of equipment worked fine for me, I am not responsible for damage caused by attempting to turn your Pi into an external keyboard. Always check adapters and cables to make sure they are providing the correct power to the correct places.
 
 ## Installation
 
