@@ -142,7 +142,7 @@ sudo ./py400kb.py --pi400 --no-output
 
 ## Troubleshooting
 
-**Commands to identify a new keyboard or mouse in Pi OS**```
+**Commands to identify a new keyboard or mouse in Pi OS**
 - List keyboards & mice for use wth the --keboard-dev & --mouse-dev arguments:
 ```bash
 ls -l /dev/input/by-id/
