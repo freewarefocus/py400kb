@@ -45,7 +45,7 @@ You can also pass custom values for the keyboard & mouse to adapt to newer model
 ## Installation
 
 1) Add the following to your boot/firmware/config.txt file just below [all] section at the bottom
-```bash
+```bashoutput
 dtoverlay=dwc2,dr_mode=peripheral
 ```
 
@@ -143,7 +143,7 @@ sudo ./py400kb.py \
 
 **Testing mode (no USB output):**
 ```bash
-sudo ./py400kb.py --pi400 --no-output
+sudo ./py400kb.py --pi400 --no-usb
 ```
 
 ## Troubleshooting
