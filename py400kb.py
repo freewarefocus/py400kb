@@ -114,12 +114,12 @@ DEVICE_CONFIGS = {
         'mouse_dev': '/dev/input/by-id/usb-PixArt_USB_Optical_Mouse-event-mouse',
     },
     'pi500plus': {
-        'keyboard_vid': 0x0000,
-        'keyboard_pid': 0x0000,
-        'keyboard_dev': '/dev/input/by-id/PLACEHOLDER',
-        'mouse_vid': 0x0000,
-        'mouse_pid': 0x0000,
-        'mouse_dev': '/dev/input/by-id/PLACEHOLDER',
+        'keyboard_vid': 0x2e8a,
+        'keyboard_pid': 0x0011,
+        'keyboard_dev': '/dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500+__Keyboard_ANSI_-event-kbd',
+        'mouse_vid': 0x093a,
+        'mouse_pid': 0x2510,
+        'mouse_dev': '/dev/input/by-id/usb-PixArt_USB_Optical_Mouse-event-mouse',
     }
 }
 
