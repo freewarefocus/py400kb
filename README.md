@@ -5,9 +5,9 @@ The goal was to remove some legacy features no longer found in the Pi 500a & 500
 
 This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
 You can also pass custom values for the keyboard & mouse to adapt to newer models or custom hardware.
-Example
+
 ## Changes from Original C Version
-```
+
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can all be overridden
