@@ -33,8 +33,10 @@ It also supports recording and playing back keyboard and mouse macro files.
 - Root access (required for USB gadget and device grabbing)
 - Raspberry Pi with USB gadget mode support (Pi 400, Pi 500 & Pi 500+)
 - The ONLY port the Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
-  Since the destination PC's USB ports can't provide enough power to run a Pi400, you will need a USB C power & data splitter.
+  Since the destination PC's USB ports can't provide enough power to run a Pi400, *you will need a USB C power & data splitter*.
+
   I used this model from Amazon although I an sure several other could work and are available from other retailers. Just make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
+  
   This model has a USB C female connector to accept power from a Raspberry Pi 400/500 compatible power adapter and a separate USB A female port which passes data to the Pi's USB C port. You will need a male to male USB A cable or an male A to male C cable to go from the splitter to your destination PC. Make sure this cable is capable of passing USB data and isn't just a charging cable.
   
   Amake USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging: 
