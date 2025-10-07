@@ -77,7 +77,7 @@ sudo python py400kb.py
 sudo ./py400kb.py --pi400
 ```
 
-**Pi 500:**
+**Pi 500:**Also
 ```bash
 sudo ./py400kb.py --pi500
 ```
@@ -93,7 +93,7 @@ While running:
 - **Ctrl + Raspberry Pi Key** - Toggle input capture on/off
 - **Ctrl + Shift + Raspberry Pi Key** - Exit the program
 
-### Command-Line Options
+## Full Command-Line Options
 
 #### Model Presets
 - `--pi400` - Use Pi 400 configuration (default)
