@@ -1,7 +1,7 @@
 # py400kb
 Use Raspberry Pi 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
 
-This project is a Python rewrite of the py400kb Pi by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
+This project is a Python rewrite of the py400kb project by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
 
 This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
 You can also pass custom values for the keyboard & mouse to adapt to newer models or custom hardware.
