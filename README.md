@@ -11,7 +11,7 @@ You can also pass in custom values for the keyboard & mouse to support to newer 
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can all be overridden
-4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added```
+4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
 5. **Improved error handling** - Better error messages & graceful cleanup
 6. **More feedback** - Added additonal status messages and a --help command line option
 
