@@ -1,6 +1,6 @@
 # Use Raspberry Pi 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
 
-This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
+This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).```
 The goal was to remove some legacy features no longer found in the Pi 500a & 500+ and add flexibilty & future proofing without having to recompile.
 
 This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
@@ -150,7 +150,7 @@ ls -l /dev/input/by-id/
 
 - NOTE: On the comand line make sure you include the full path to the name of the mouse or keyboard. For example:
 ```bash
---keyboard-dev /dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500_Keyboard-event-kbdExample
+--keyboard-dev /dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500_Keyboard-event-kbd
 ```
 
 - Find the vid & pid values for the --keyboard[mouse]-vid & keyboard[mouse]-pid arguments
