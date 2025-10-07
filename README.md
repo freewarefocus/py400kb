@@ -98,6 +98,7 @@ sudo ./py400kb.py --pi500plus
 
 #### Other Options
 - `--no-usb` - Disable USB output (testing/debugging mode)
+- `--hide-events` - Don't show mouse & keyboard raw input on the screen
 - `--help` - Show py400kb command line parameters
 
 ### Examples
