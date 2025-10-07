@@ -7,7 +7,7 @@ This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mo
 You can also pass custom values for the keyboard & mouse to adapt to newer models or custom hardware.
 Example
 ## Changes from Original C Version
-
+```
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can all be overridden
@@ -113,7 +113,7 @@ sudo ./py400kb.py --keyboard-vid 0x2a8a --keyboard-pid 0x0210
 sudo ./py400kb.py --pi500 --keyboard-dev /dev/input/by-id/custom-keyboard-path
 ```
 
-**Define a completely different keyboard**
+**Custom keyboard configuration**
 ```bash
 sudo ./py400kb.py --keyboard-vid 0x045e --keyboard-pid 0x000b --keyboard-dev /dev/input/by-id/usb-045e_Microsoft_Natural_Keyboard_Elite-event-kbd
 ```
@@ -147,17 +147,23 @@ While running:
 ```bash
 ls -l /dev/input/by-id/
 ```
+```
 - NOTE: On the comand line make sure you include the full path to the name of the mouse or keyboard. For example:
+```bash
 --keyboard-dev /dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500_Keyboard-event-kbdExample
+```
 
 - Find the vid & pid values for the --keyboard[mouse]-vid & keyboard[mouse]-pid arguments
-- NOTE: VID stands for Vendor ID and PID stands for Product ID these identify a specific keyboard or mouse made by a vendor
+NOTE: VID stands for Vendor ID and PID stands for Product ID these identify a specific keyboard or mouse made by a vendor
 ```bash
 lsusb
 ```
+
 - Finding the vid & pid in the output (sample line):
+```bash
 2e8a:0011 Raspberry Pi Ltd Pi 500+ Keyboard (ANSI)
 VID : PID
+```
 
 **"No devices to forward"**
 - Check that the VID/PID values match your hardware
