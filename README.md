@@ -5,6 +5,7 @@ The goal was to remove some legacy features no longer found in the Pi 500 & 500+
 
 This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
 You can also pass in custom values for the keyboard & mouse to support to newer models or custom hardware.
+It also supports recording and playing back keyboard and mouse macro files.
 
 ## Changes from Original C Version
 
@@ -23,6 +24,7 @@ You can also pass in custom values for the keyboard & mouse to support to newer 
 - Exit with Ctrl+Shift+Raspberry key
 - Command-line overrides for all device parameters
 - The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
+- The --record-macro {filename} and --play-macro {filename} allows you to record a keyboard & mouse session and then play it back exactly as it occured once again
 
 ## Requirements
 
@@ -110,6 +112,10 @@ While running:
 - `--mouse-pid PID` - Mouse product ID (hex or decimal)
 - `--mouse-dev PATH` - Mouse device path
 
+#### Macro Options
+- `--record-macro filename` - Records a macro to file in JSONL format
+- `--play-macro filename` - Plays back a recorded macro file and then quits afer playback
+
 #### Other Options
 - `--no-usb` - Disable USB output (testing/debugging mode)
 - `--hide-events` - Don't show mouse & keyboard raw input on the screen
@@ -146,6 +152,16 @@ sudo ./py400kb.py \
 **Testing mode (no USB output):**
 ```bash
 sudo ./py400kb.py --pi400 --no-usb
+```
+
+**Recording a Macro file:**
+```bash
+sudo ./py400kb.py --pi500plus --record-macro mymacro.jsonl
+```
+
+**Playback a Macro file:**
+```bash
+sudo ./py400kb.py --pi500plus --play-macro mymacro.jsonl
 ```
 
 ## Troubleshooting
