@@ -1,10 +1,10 @@
 # Use Raspberry Pi 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
 
 This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
-The goal was to remove some legacy features no longer found in the Pi 500a & 500+ and add flexibilty & future proofing without having to recompile.
+The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add flexibilty & future proofing without having to recompile.
 
 This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
-You can also pass custom values for the keyboard & mouse to adapt to newer models or custom hardware.
+You can also pass in custom values for the keyboard & mouse to support to newer models or custom hardware.
 
 ## Changes from Original C Version
 
@@ -17,7 +17,7 @@ You can also pass custom values for the keyboard & mouse to adapt to newer model
 
 ## Features
 
-- Forwards internal keyboard & mouse HID reports out of the Pi's USB C port to another computer
+- Forwards internal keyboard & a connected mouse HID reports out of the Pi's USB C port to another computer
 - Build in support for Pi 400, Pi 500, Pi 500+ & more with the command-line configuration
 - Toggle capture on/off with Ctrl+Raspberry key
 - Exit with Ctrl+Shift+Raspberry key
@@ -28,7 +28,7 @@ You can also pass custom values for the keyboard & mouse to adapt to newer model
 
 - Python 3.6 or later
 - Root access (required for USB gadget and device grabbing)
-- Raspberry Pi with USB gadget mode support (Pi 400, Pi 500, etc.)
+- Raspberry Pi with USB gadget mode support (Pi 400, Pi 500 & Pi 500+)
 - The ONLY port the Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
   Since the destination PC's USB ports can't provide enough power to run a Pi400, you will need a USB C power & data splitter.
   I used this model from Amazon although I an sure several other could work and are available from other retailers. Just make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
@@ -41,6 +41,8 @@ You can also pass custom values for the keyboard & mouse to adapt to newer model
   
   SB 3.0 Male to Male Cable 3Ft,USB to USB Cable with Gold-Plated Connector
   www.amazon.com/Jelly-Tang-USB-3-0-3Ft/dp/B07KJFWYXF
+
+  For testing I used the above cables & adapters along with an official Raspberry Pi 45 watt USB C power adapter & a Pi400 & a Pi500+. Although this combination of equipment worked fine for me, I am not responsible for damage caused by attempting to turn your Pi into an external keyboard. Also check adapters and cables to make sure they are providing the correct power to the correct places.
 
 ## Installation
 
