@@ -15,6 +15,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
 5. **Improved error handling** - Better error messages & graceful cleanup
 6. **More feedback** - Added additonal status messages and a --help command line option
+7. **Added Macro Record/Playback** - Now supports recording and playing back keyboard and mouse sessions
 
 ## Features
 
