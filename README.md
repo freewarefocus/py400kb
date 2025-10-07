@@ -11,7 +11,7 @@ You can also pass custom values for the keyboard & mouse to adapt to newer model
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can all be overridden
-4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
+4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added```
 5. **Improved error handling** - Better error messages & graceful cleanup
 6. **More feedback** - Added additonal status messages and a --help command line option
 
@@ -142,12 +142,12 @@ sudo ./py400kb.py --pi400 --no-output
 
 ## Troubleshooting
 
-**Commands to identify a new keyboard or mouse in Pi OS**
+**Commands to identify a new keyboard or mouse in Pi OS**```
 - List keyboards & mice for use wth the --keboard-dev & --mouse-dev arguments:
 ```bash
 ls -l /dev/input/by-id/
 ```
-```
+
 - NOTE: On the comand line make sure you include the full path to the name of the mouse or keyboard. For example:
 ```bash
 --keyboard-dev /dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500_Keyboard-event-kbdExample
