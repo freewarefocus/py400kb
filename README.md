@@ -42,7 +42,7 @@ It also supports recording and playing back keyboard and mouse macro files.
   Amake USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging: 
   www.amazon.com/dp/B0F6SRN24Y
 
-  For the USB A to A cable I used this model (again many brands and vendors will work): 
+  For the USB A to A cable I used this model (again many brands and vendors should work): 
   
   SB 3.0 Male to Male Cable 3Ft,USB to USB Cable with Gold-Plated Connector
   www.amazon.com/Jelly-Tang-USB-3-0-3Ft/dp/B07KJFWYXF
