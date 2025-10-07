@@ -1,5 +1,4 @@
-# py400kb
-Use Raspberry Pi 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
+# Use Raspberry Pi 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
 
 This project is a Python rewrite of the py400kb project by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
 
