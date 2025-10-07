@@ -8,16 +8,18 @@ Released under the MIT License
 """
 
 import argparse
+import json
 import errno
 import fcntl
 import os
+import select
 import signal
 import struct
 import sys
 import time
 import subprocess
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional
 
 # Additional errno constants for handling specific errors
 EPIPE = 32
@@ -137,6 +139,12 @@ class USBGadget:
     def init(self, vid: int, pid: int) -> bool:
         """Initialize USB gadget"""
         try:
+            # Clean up any existing gadget first to ensure clean state
+            if self.gadget_path.exists():
+                print("Found existing gadget configuration, cleaning up...")
+                self.cleanup()
+                time.sleep(0.5)  # Give time for cleanup to complete
+            
             # Load libcomposite module
             self._modprobe_libcomposite()
             
@@ -165,12 +173,12 @@ class USBGadget:
             func_path.mkdir(parents=True, exist_ok=True)
             self._write_file(func_path / 'protocol', '1')
             self._write_file(func_path / 'subclass', '0')
-            self._write_file(func_path / 'report_length', '16')
+            self._write_file(func_path / 'report_length', '9')  # 1 byte report ID + 8 bytes keyboard data
             
             # Write HID report descriptor
             with open(func_path / 'report_desc', 'wb') as f:
                 f.write(REPORT_DESC)
-            
+
             # Create configuration
             config_path = self.gadget_path / 'configs' / 'c.1'
             config_path.mkdir(parents=True, exist_ok=True)
@@ -191,6 +199,8 @@ class USBGadget:
                 self._write_file(self.gadget_path / 'UDC', udc)
                 self.enabled = True
                 print(f"USB Gadget enabled on UDC: {udc}")
+                # Give the host PC time to enumerate the device
+                time.sleep(1.0)
                 return True
             else:
                 print("Error: No UDC found")
@@ -206,10 +216,19 @@ class USBGadget:
             return
             
         try:
-            # Disable gadget
+            # Disable gadget first
             if self.enabled:
                 self._write_file(self.gadget_path / 'UDC', '')
                 self.enabled = False
+                # Give the host PC time to recognize the disconnect
+                time.sleep(0.5)
+            
+            # Also try to disable even if we don't think it's enabled
+            # (in case of stale state from previous crash)
+            try:
+                self._write_file(self.gadget_path / 'UDC', '')
+            except:
+                pass
             
             # Remove symlinks
             config_path = self.gadget_path / 'configs' / 'c.1'
@@ -258,11 +277,16 @@ class USBGadget:
 class HIDForwarder:
     """Forwards HID reports from internal devices to USB gadget"""
     
-    def __init__(self, config: dict, no_usb: bool = False, hide_events: bool = False):
+    def __init__(self, config: dict, no_usb: bool = False, hide_events: bool = False,
+                 record_path: Optional[str] = None, play_path: Optional[str] = None):
         self.config = config
         self.no_usb = no_usb
         self.hide_events = hide_events
         self.running = False
+        self.record_path = record_path
+        self.play_path = play_path
+        self.record_file = None
+        self.record_t0 = 0.0
         self.grabbed = False
         
         self.keyboard_fd: Optional[int] = None
@@ -363,29 +387,192 @@ class HIDForwarder:
         
         self.grabbed = False
     
-    def send_empty_reports(self):
+    
+    def _record_event(self, report_id: int, data: bytes):
+        """Write one event to JSONL with relative time offset."""
+        if not self.record_file:
+            return
+        t = time.monotonic() - self.record_t0
+        payload = {"t": t, "id": report_id, "hex": data.hex()}
+        self.record_file.write(json.dumps(payload, separators=(',', ':')) + "\n")
+        self.record_file.flush()
+
+    def _play_macro(self, path: str) -> int:
+        """Play a JSONL macro file to the USB HID and exit."""
+        # Check if the file exists first
+        if not os.path.exists(path):
+            print(f"Error: Macro file not found: {path}")
+            return 1
+        
+        if self.no_usb:
+            print("Warning: --play-macro with --no-usb will not write to USB; printing only.")
+        # Ensure gadget is ready unless no_usb was requested
+        if not self.no_usb and self.hid_output_fd is None:
+            print("Error: USB gadget not initialized")
+            return 1
+
+        events = []
+        try:
+            with open(path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    ev = json.loads(line)
+                    if "hex" in ev:
+                        data = bytes.fromhex(ev["hex"])
+                    else:
+                        data = bytes(ev["data"])  # tolerate legacy format
+                    events.append((float(ev["t"]), int(ev["id"]), data))
+        except Exception as e:
+            print(f"Error reading macro file: {e}")
+            return 1
+
+        events.sort(key=lambda x: x[0])
+        start = time.monotonic()
+        for t_target, report_id, data in events:
+            # sleep until target time
+            while True:
+                now = time.monotonic() - start
+                remaining = t_target - now
+                if remaining <= 0:
+                    break
+                time.sleep(min(remaining, 0.01))
+
+            if not self.hide_events:
+                tag = 'K' if report_id == 1 else 'M'
+                print(f"{tag}: {' '.join(f'{b:02x}' for b in data)} @ {t_target:.3f}s")
+
+            if not self.no_usb and self.hid_output_fd is not None:
+                try:
+                    os.write(self.hid_output_fd, bytes([report_id]) + data)
+                    time.sleep(0.001)
+                except (OSError, BrokenPipeError) as e:
+                    if e.errno not in (EPIPE, ESHUTDOWN):
+                        print(f"Warning: Error writing playback report: {e}")
+
+        self.send_empty_reports()
+        return 0
+
+    def send_empty_reports(self, silent=False):
         """Send empty HID reports to release all keys/buttons"""
         if self.no_usb or self.hid_output_fd is None:
             return
         
-        if self.keyboard_fd is not None:
-            report = bytes([1] + [0] * KEYBOARD_HID_REPORT_SIZE)
-            try:
-                os.write(self.hid_output_fd, report)
-            except (OSError, BrokenPipeError) as e:
+        # Always send keyboard empty report (even if keyboard_fd is None)
+        # to ensure any stuck keys are released
+        report = bytes([1] + [0] * KEYBOARD_HID_REPORT_SIZE)
+        try:
+            os.write(self.hid_output_fd, report)
+            time.sleep(0.05)  # Give some time for dest to process
+        except (OSError, BrokenPipeError) as e:
+            if not silent:
                 print("Keyboard BrokenPipeError - likely USB isn't connected to destination PC")
-                pass
         
-        if self.mouse_fd is not None:
-            report = bytes([2] + [0] * MOUSE_HID_REPORT_SIZE)
-            try:
-                os.write(self.hid_output_fd, report)
-            except (OSError, BrokenPipeError) as e:
+        # Always send mouse empty report (even if mouse_fd is None)
+        # to ensure any stuck buttons are released
+        report = bytes([2] + [0] * MOUSE_HID_REPORT_SIZE)
+        try:
+            os.write(self.hid_output_fd, report)
+            time.sleep(0.05)  # Give some time for dest to process
+        except (OSError, BrokenPipeError) as e:
+            if not silent:
                 print("Mouse BrokenPipeError - likely USB isn't connected to destination PC")
-                pass
     
     def run(self) -> int:
         """Main forwarding loop"""
+        # Playback mode: skip device discovery and live reading
+        if self.play_path:
+            if not self.no_usb:
+                if not self.gadget.init(self.config['keyboard_vid'], self.config['keyboard_pid']):
+                    print("Failed to initialize USB gadget")
+                    return 1
+                # open hidg0
+                hidg_path = '/dev/hidg0'
+                for _ in range(50):
+                    try:
+                        self.hid_output_fd = os.open(hidg_path, os.O_WRONLY | os.O_NONBLOCK)
+                        break
+                    except OSError as e:
+                        if e.errno == errno.EINTR:
+                            continue
+                        time.sleep(0.1)
+                if self.hid_output_fd is None:
+                    print(f"Error opening {hidg_path} for writing")
+                    return 1
+            try:
+                return self._play_macro(self.play_path)
+            finally:#!/usr/bin/env python3
+"""
+Py400kb USB HID Forwarder
+Forwards keyboard and mouse input from PIx00 computers to USB gadget mode
+Currently supports Pi 400, Pi 500, and Pi 500+
+This is a Python re-write of the C program pi400kb by Gadgetoid
+Released under the MIT License
+"""
+
+import argparse
+import errno
+import fcntl
+import os
+import signal
+import struct
+import sys
+import time
+import subprocess
+from pathlib import Path
+from typing import Optional, Tuple
+
+# Additional errno constants for handling specific errors
+EPIPE = 32
+ESHUTDOWN = 108 # Usually destination PC not connected to USB cable
+
+# HID Report Descriptor combining keyboard and mouse
+REPORT_DESC = bytes([
+    # Keyboard Report (Report ID 1)
+    0x05, 0x01,        # Usage Page (Generic Desktop Ctrls)
+    0x09, 0x06,        # Usage (Keyboard)
+    0xA1, 0x01,        # Collection (Application)
+    0x85, 0x01,        #   Report ID (1)
+    0x05, 0x07,        #   Usage Page (Kbrd/Keypad)
+    0x19, 0xE0,        #   Usage Minimum (0xE0)
+    0x29, 0xE7,        #   Usage Maximum (0xE7)
+    0x15, 0x00,        #   Logical Minimum (0)
+    0x25, 0x01,        #   Logical Maximum (1)
+    0x75, 0x01,        #   Report Size (1)
+    0x95, 0x08,        #   Report Count (8)
+    0x81, 0x02,        #   Input (Data,Var,Abs)
+    0x95, 0x01,        #   Report Count (1)
+    0x75, 0x08,        #   Report Size (8)
+    0x81, 0x01,        #   Input (Const,Array,Abs)
+    0x95, 0x03,        #   Report Count (3)
+    0x75, 0x01,        #   Report Size (1)
+    0x05, 0x08,        #   Usage Page (LEDs)
+    0x19, 0x01,        #   Usage Minimum (Num Lock)
+    0x29, 0x03,        #   Usage Maximum (Scroll Lock)
+    0x91, 0x02,        #   Output (Data,Var,Abs)
+    0x95, 0x05,        #   Report Count (5)
+    0x75, 0x01,        #   Report Size (1)
+    0x91, 0x01,        #   Output (Const,Array,Abs)
+    0x95, 0x06,        #   Report Count (6)
+    0x75, 0x08,        #   Report Size (8)
+    0x15, 0x00,        #   Logical Minimum (0)
+    0x26, 0xFF, 0x00,  #   Logical Maximum (255)
+    0x05, 0x07,        #   Usage Page (Kbrd/Keypad)
+    0x19, 0x00,        #   Usage Minimum (0x00)
+    0x2A, 0xFF, 0x00,  #   Usage Maximum (0xFF)
+    0x81, 0x00,        #   Input (Data,Array,Abs)
+    0xC0,              # End Collection
+
+    # Mouse Report (Report ID 2)
+
+                if self.hid_output_fd is not None:
+                    os.close(self.hid_output_fd)
+                if not self.no_usb:
+                    print("Cleanup USB")
+                    self.gadget.cleanup()
+
+
         # Find HID devices
         self.keyboard_fd = self.find_hidraw_device(
             'keyboard',
@@ -427,24 +614,56 @@ class HIDForwarder:
             if self.hid_output_fd is None:
                 print(f"Error opening {hidg_path} for writing")
                 return 1
+            
+            # Send initial empty reports to ensure clean state
+            print("Sending initial empty reports to clear any stuck keys/buttons...")
+            self.send_empty_reports(silent=True)
+            time.sleep(0.1)
+        
+        # Open recorder if requested (do this early to catch errors before device operations)
+        if self.record_path:
+            try:
+                self.record_file = open(self.record_path, 'w', buffering=1)
+                self.record_t0 = time.monotonic()
+                print(f"Recording macro to: {self.record_path}")
+            except Exception as e:
+                print(f"Error opening macro file for recording: {e}")
+                return 1
         
         # Grab devices
         self.grab_both()
-        
+
         print("Running... (Ctrl+Raspberry to toggle capture, Ctrl+Shift+Raspberry to exit)")
         self.running = True
         
         # Main loop
         try:
             while self.running:
-                # Read from keyboard
+                # Use select to wait for data on file descriptors
+                read_fds = []
                 if self.keyboard_fd is not None:
+                    read_fds.append(self.keyboard_fd)
+                if self.mouse_fd is not None:
+                    read_fds.append(self.mouse_fd)
+                
+                if not read_fds:
+                    break
+                
+                # Wait for data with a timeout
+                ready, _, _ = select.select(read_fds, [], [], 0.1)
+                
+                # Read from keyboard
+                if self.keyboard_fd is not None and self.keyboard_fd in ready:
                     try:
                         data = os.read(self.keyboard_fd, KEYBOARD_HID_REPORT_SIZE)
                         if len(data) == KEYBOARD_HID_REPORT_SIZE:
                             if not self.hide_events:
                                 print(f"K: {' '.join(f'{b:02x}' for b in data)}")
                             
+                            # Record macro data if in that mode    
+                            if self.record_file and self.grabbed:
+                                self._record_event(1, data)
+        
                             # Forward to USB gadget if grabbed
                             if not self.no_usb and self.grabbed and self.hid_output_fd is not None:
                                 report = bytes([1]) + data
@@ -453,35 +672,38 @@ class HIDForwarder:
                                     time.sleep(0.001)
                                 except (OSError, BrokenPipeError) as e:
                                     # Ignore pipe errors when no host is connected
-                                    if hasattr(e, 'errno') and e.errno not in (EPIPE, ESHUTDOWN):
+                                    if e.errno not in (EPIPE, ESHUTDOWN):
                                         print(f"Warning: Error writing keyboard report: {e}")
                             
                             # Check for special key combinations
-                            if len(data) > 0:
-                                # Ctrl + Raspberry (0x09) - toggle capture
-                                if data[0] == 0x09:
-                                    if self.grabbed:
-                                        self.ungrab_both()
-                                        self.send_empty_reports()
-                                    else:
-                                        self.grab_both()
-                                
-                                # Ctrl + Shift + Raspberry (0x0b) - exit
-                                elif data[0] == 0x0b:
-                                    self.running = False
-                                    break
+                            # Ctrl + Raspberry (0x09) - toggle capture
+                            if data[0] == 0x09:
+                                if self.grabbed:
+                                    self.ungrab_both()
+                                    self.send_empty_reports()
+                                else:
+                                    self.grab_both()
+                            
+                            # Ctrl + Shift + Raspberry (0x0b) - exit
+                            elif data[0] == 0x0b:
+                                self.running = False
+                                break
                     except OSError as e:
                         if e.errno != errno.EAGAIN:
                             raise
                 
                 # Read from mouse
-                if self.mouse_fd is not None:
+                if self.mouse_fd is not None and self.mouse_fd in ready:
                     try:
                         data = os.read(self.mouse_fd, MOUSE_HID_REPORT_SIZE)
                         if len(data) == MOUSE_HID_REPORT_SIZE:
                             if not self.hide_events:
                                 print(f"M: {' '.join(f'{b:02x}' for b in data)}")
                             
+                            #  Record mouse events if in macro mode
+                            if self.record_file and self.grabbed:
+                                self._record_event(2, data)
+                                
                             # Forward to USB gadget if grabbed
                             if not self.no_usb and self.grabbed and self.hid_output_fd is not None:
                                 report = bytes([2]) + data
@@ -490,19 +712,20 @@ class HIDForwarder:
                                     time.sleep(0.001)
                                 except (OSError, BrokenPipeError) as e:
                                     # Ignore pipe errors when no host is connected
-                                    if hasattr(e, 'errno') and e.errno not in (EPIPE, ESHUTDOWN):
+                                    if e.errno not in (EPIPE, ESHUTDOWN):
                                         print(f"Warning: Error writing mouse report: {e}")
                     except OSError as e:
                         if e.errno != errno.EAGAIN:
                             raise
-                
-                # Small sleep to prevent busy waiting
-                time.sleep(0.001)
         
         finally:
             # Cleanup
             self.ungrab_both()
             self.send_empty_reports()
+            
+            if self.record_file:
+                self.record_file.close()
+                print(f"Macro recording saved")
             
             if self.keyboard_fd is not None:
                 os.close(self.keyboard_fd)
@@ -520,7 +743,8 @@ class HIDForwarder:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Pi USB HID Forwarder - Forward keyboard/mouse to USB gadget mode'
+        description='Pi USB HID Forwarder - Forward keyboard/mouse to USB gadget mode',
+        allow_abbrev=False
     )
     
     # Model presets
@@ -546,11 +770,18 @@ def main():
     parser.add_argument('--mouse-dev', type=str,
                        help='Mouse device path')
    
+     # Macro options (mutually exclusive)
+    macro_group = parser.add_mutually_exclusive_group()
+    macro_group.add_argument('--record-macro', metavar='FILE', type=str,
+                             help='Record a macro file in JSONL format of keyboard/mouse with timing')
+    macro_group.add_argument('--play-macro', metavar='FILE', type=str,
+                             help='Play back a recorded macro JSONL file to USB and exit')  
+   
     # Output options
     parser.add_argument('--no-usb', action='store_true',
                        help='Disable USB output (testing mode)')
     parser.add_argument('--hide-events', action='store_true',
-                   help='Hide the keyboard and mouse event output on screen')
+                   help='Hide the keyboard and mouse event output on screen (macros will still record)')
     
     args = parser.parse_args()
     
@@ -587,7 +818,8 @@ def main():
         return 1
     
     # Run forwarder
-    forwarder = HIDForwarder(config, no_usb=args.no_usb, hide_events=args.hide_events)
+    forwarder = HIDForwarder(config, no_usb=args.no_usb, hide_events=args.hide_events,
+                            record_path=args.record_macro, play_path=args.play_macro)
 
     return forwarder.run()
 
