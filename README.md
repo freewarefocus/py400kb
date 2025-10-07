@@ -79,7 +79,7 @@ sudo python py400kb.py
 sudo ./py400kb.py --pi400
 ```
 
-**Pi 500:**Also
+**Pi 500:**
 ```bash
 sudo ./py400kb.py --pi500
 ```
