@@ -114,7 +114,7 @@ While running:
 - `--mouse-dev PATH` - Mouse device path
 
 #### Macro Options
-- `--record-macro filename` - Records a macro to file in JSONL format
+- `--record-macro filename` - Records a macro to a file in JSONL format
 - `--play-macro filename` - Plays back a recorded macro file and then quits afer playback
 
 #### Other Options
