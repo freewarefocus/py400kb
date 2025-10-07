@@ -22,7 +22,7 @@ You can also pass custom values for the keyboard & mouse to adapt to newer model
 - Toggle capture on/off with Ctrl+Raspberry key
 - Exit with Ctrl+Shift+Raspberry key
 - Command-line overrides for all device parameters
-- Like the origninal pi400kb, the raw keyboard & mouse inputs are shown (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00)
+- The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
 
 ## Requirements
 
