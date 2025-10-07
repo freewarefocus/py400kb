@@ -79,6 +79,12 @@ sudo ./py400kb.py --pi500
 sudo ./py400kb.py --pi500plus
 ```
 
+## Keyboard Shortcuts
+
+While running:
+- **Ctrl + Raspberry Pi Key** - Toggle input capture on/off
+- **Ctrl + Shift + Raspberry Pi Key** - Exit the program
+
 ### Command-Line Options
 
 #### Model Presets
@@ -134,12 +140,6 @@ sudo ./py400kb.py \
 sudo ./py400kb.py --pi400 --no-output
 ```
 
-## Keyboard Shortcuts
-
-While running:
-- **Ctrl + Raspberry Pi Key** - Toggle input capture on/off
-- **Ctrl + Shift + Raspberry Pi Key** - Exit the program
-
 ## Troubleshooting
 
 **Commands to identify a new keyboard or mouse in Pi OS**
@@ -154,7 +154,7 @@ ls -l /dev/input/by-id/
 ```
 
 - Find the vid & pid values for the --keyboard[mouse]-vid & keyboard[mouse]-pid arguments
-NOTE: VID stands for Vendor ID and PID stands for Product ID these identify a specific keyboard or mouse made by a vendor
+NOTE: VID stands for Vendor ID and PID stands for Product ID - these identify a specific keyboard or mouse made by a vendor
 ```bash
 lsusb
 ```
