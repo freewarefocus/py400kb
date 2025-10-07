@@ -87,7 +87,7 @@ sudo ./py400kb.py --pi400
 sudo ./py400kb.py --pi500
 ```
 
-**Pi 500+ (pi500Plus):**
+**Pi 500+ (pi500plus):**
 ```bash
 sudo ./py400kb.py --pi500plus
 ```
