@@ -178,7 +178,7 @@ If you want to plug in a differnet keyboard or mouse instead of using one of the
 ls -l /dev/input/by-id/
 ```
 
-IMPORTANT NOTE: On the command line, make sure you include the full path to the name of the mouse or keyboard. For example:
+NOTE: On the command line, make sure you include the **full path** (/dev/input/by-id/) to the name of the mouse or keyboard:
 ```bash
 --keyboard-dev /dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500_Keyboard-event-kbd
 ```
