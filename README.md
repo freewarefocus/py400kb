@@ -20,13 +20,12 @@ It also supports recording and playing back keyboard and mouse macro files.
 ## Features
 
 - Forwards internal keyboard & a connected mouse HID reports out of the Pi's USB C port to another computer
-- Build in support for Pi 400, Pi 500, Pi 500+ & more with the command-line configuration
+- Build in support for Pi 400, Pi 500, Pi 500+ and Pi4 & 5 with the command-line configuration
 - Toggle capture on/off with Ctrl+Raspberry key
 - Exit with Ctrl+Shift+Raspberry key
-- Command-line overrides for all device parameters
+- Command-line overrides for all device parameters for custom mice & keyboards
 - The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
 - The --record-macro {filename} and --play-macro {filename} allow you to record a keyboard & mouse session and then play it back exactly as it occurred once again
-- Should support all pi4 and pi5 models, although you will need to pass in the exact settings for your keyboard & mouse (using the keyboard/mouse VID, PID and DEV command line options)
 
 ## Requirements
 
