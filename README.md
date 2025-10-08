@@ -12,7 +12,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can be overridden
-4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be addedShould sup```port all pi4 and pi5 models, although you will nee```d to pass in the exact settings for your keyboard & mouse (using the keyboard/mouse VID, PID and DEV command line options)
+4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be addedShould support all pi4 and pi5 models, although you will need to pass in the exact settings for your keyboard & mouse (using the keyboard/mouse VID, PID and DEV command line options)
 
 5. **Improved error handling** - Better error messages & graceful cleanup
 6. **More feedback** - Added additonal status messages and a --help command line option
