@@ -1,7 +1,7 @@
 # Use Raspberry Pi 4, 5, 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
 
 This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
-The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add flexibilty & future proofing without having to recompile.
+The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add flexibility and future-proofing without having to recompile.
 
 This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
 You can also pass in custom values for the keyboard & mouse to support newer models or custom hardware.
@@ -11,7 +11,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
-3. **Added parameter overrides** - All VID/PID/device paths can all be overridden
+3. **Added parameter overrides** - All VID/PID/device paths can be overridden
 4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
 5. **Improved error handling** - Better error messages & graceful cleanup
 6. **More feedback** - Added additonal status messages and a --help command line option
@@ -25,7 +25,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 - Exit with Ctrl+Shift+Raspberry key
 - Command-line overrides for all device parameters
 - The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
-- The --record-macro {filename} and --play-macro {filename} allows you to record a keyboard & mouse session and then play it back exactly as it occured once again
+- The --record-macro {filename} and --play-macro {filename} allow you to record a keyboard & mouse session and then play it back exactly as it occurred once again
 - Should support all pi4 and pi5 models, although you will need to pass in the exact settings for your keyboard & mouse (using the keyboard/mouse VID, PID and DEV command line options)
 
 ## Requirements
@@ -36,9 +36,9 @@ It also supports recording and playing back keyboard and mouse macro files.
 - The ONLY port the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
   Since the destination PC's USB ports can't provide enough power to run any of these, **you will need a USB C power & data splitter**.
 
-  I used this model from Amazon although I an sure several other could work and are available from other retailers. Just make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
+  I used this model from Amazon, although I am sure several others could work and are available from other retailers. Make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
   
-  This model has a USB C female connector to accept power from a Raspberry Pi 400/500 compatible power adapter and a separate USB A female port which passes data to the Pi's USB C port. You will need a male to male USB A cable or an male A to male C cable to go from the splitter to your destination PC. Make sure this cable is capable of passing USB data and isn't just a charging cable.
+  This model has a USB C female connector to accept power from a Raspberry Pi 400/500 compatible power adapter and a separate USB A female port, which passes data to the Pi's USB C port. You will need a male to male USB A cable or an male A to male C cable to go from the splitter to your destination PC. Make sure this cable is capable of passing USB data and isn't just a charging cable.
   
   Amake USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging: 
   www.amazon.com/dp/B0F6SRN24Y
@@ -69,7 +69,7 @@ sudo modprobe libcomposite
 chmod +x py400kb.py
 ```
 
-If not made executable you can can run it like this instead:
+If not made executable, you can run it like this instead:
 ```bash
 sudo python py400kb.py
 ```
@@ -178,7 +178,7 @@ If you want to plug in a differnet keyboard or mouse instead of using one of the
 ls -l /dev/input/by-id/
 ```
 
-IMPORTANT NOTE: On the comand line make sure you include the full path to the name of the mouse or keyboard. For example:
+IMPORTANT NOTE: On the command line, make sure you include the full path to the name of the mouse or keyboard. For example:
 ```bash
 --keyboard-dev /dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500_Keyboard-event-kbd
 ```
@@ -217,7 +217,7 @@ VID : PID
 - Connect the USB cable to the destination computer to start forwarding input
 
 ## Thanks & Contributions
-This project would not have been possible without the coding work of Gadgetoid and his original C version of pi400kb. This python program is closely based on the core of this original code.
+This project would not have been possible without the coding work of Gadgetoid and his original C version of pi400kb. This Python program is closely based on the core of the original code.
 Original Project: pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/)
 
 ## License
