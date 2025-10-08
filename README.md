@@ -33,7 +33,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 - Python 3.6 or later
 - Root access (required for USB gadget and device grabbing)
 - Raspberry Pi with USB C gadget mode support (currently the Pi 4, Pi 5, Pi 400, Pi 500 & Pi 500+)
-- The **ONLY** port on the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
+- The **ONLY** port on the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB C power port.
   Since the destination PC's USB ports can't provide enough power to run any of these, **you will need a USB C power & data splitter**.
 
   I used this model from Amazon, although I am sure several others could work and are available from other retailers. Make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
