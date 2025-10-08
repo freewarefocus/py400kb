@@ -34,7 +34,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 - Root access (required for USB gadget and device grabbing)
 - Raspberry Pi with USB gadget mode support (Pi 400, Pi 500 & Pi 500+)
 - The ONLY port the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
-  Since the destination PC's USB ports can't provide enough power to run a Pi400, *you will need a USB C power & data splitter*.
+  Since the destination PC's USB ports can't provide enough power to run any of these, **you will need a USB C power & data splitter**.
 
   I used this model from Amazon although I an sure several other could work and are available from other retailers. Just make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
   
@@ -48,7 +48,7 @@ It also supports recording and playing back keyboard and mouse macro files.
   SB 3.0 Male to Male Cable 3Ft,USB to USB Cable with Gold-Plated Connector
   www.amazon.com/Jelly-Tang-USB-3-0-3Ft/dp/B07KJFWYXF
 
-  For testing I used the above cables & adapters along with an official Raspberry Pi 45 watt USB C power adapter, the official Raspberry Pi USB mouse and a Pi400 & a Pi500+. Although this combination of equipment worked fine for me, *I am not responsible for damage caused by attempting to turn your Pi into an external keyboard*. Always check adapters and cables to make sure they are providing the correct power to the correct places.
+  For testing I used the above cables & adapters along with an official Raspberry Pi 45 watt USB C power adapter, the official Raspberry Pi USB mouse and a Pi400 & a Pi500+. Although this combination of equipment worked fine for me, **I am not responsible for damage caused by attempting to turn your Pi into an external keyboard & mouse**. Always check adapters and cables to make sure they are providing the correct power to the correct places.
 
 ## Installation
 
