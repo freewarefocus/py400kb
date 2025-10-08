@@ -63,12 +63,12 @@ dtoverlay=dwc2,dr_mode=peripheral
 sudo modprobe libcomposite
 ```
 
-4) Optional - Download py400kb.py from this repo and make the script executable with this command (or use the Pi OS GUI):
+4) Download py400kb.py from this repo and make the script executable with this command (or use the Pi OS GUI):
 ```bash
 chmod +x py400kb.py
 ```
 
-If not made executable, you can run it like this instead:
+If not made executable, you can still run it like this instead:
 ```bash
 sudo python py400kb.py
 ```
