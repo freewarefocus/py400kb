@@ -6,7 +6,7 @@ The goal was to remove some legacy features no longer found in the Pi 500 & 500+
 This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
 You can also pass in custom values for the keyboard & mouse to support newer models or custom hardware.
 It also supports recording and playing back keyboard and mouse macro files.
-
+website
 ## Changes from Original C Version
 
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
@@ -168,7 +168,7 @@ sudo ./py400kb.py --pi500plus --record-macro mymacro.jsonl
 sudo ./py400kb.py --pi500plus --play-macro mymacro.jsonl
 ```
 
-## Using a differnt keyboard or mouse 
+## Using a different keyboard and/or mouse 
 
 If you want to plug in a differnet keyboard or mouse instead of using one of the presets (--pi400, --pi500, --pi500plus) then you will need to pass in the device's HID, PID and device name. If you are just using a different mouse, for example, you can still use a preset and pass in an override just for the mouse. These commands were tested on Pi OS Bookworm & Trixie.
 
