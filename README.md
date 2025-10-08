@@ -31,7 +31,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 
 - Python 3.6 or later
 - Root access (required for USB gadget and device grabbing)
-- Raspberry Pi with USB gadget mode support (Pi 400, Pi 500 & Pi 500+)
+- Raspberry Pi with USB gadget mode support (Pi 4, Pi 5, Pi 400, Pi 500 & Pi 500+)
 - The ONLY port the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
   Since the destination PC's USB ports can't provide enough power to run any of these, **you will need a USB C power & data splitter**.
 
