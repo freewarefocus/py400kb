@@ -1,4 +1,4 @@
-# Use Raspberry Pi 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
+# Use Raspberry Pi 4, 5, 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
 
 This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
 The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add flexibilty & future proofing without having to recompile.
@@ -26,13 +26,14 @@ It also supports recording and playing back keyboard and mouse macro files.
 - Command-line overrides for all device parameters
 - The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
 - The --record-macro {filename} and --play-macro {filename} allows you to record a keyboard & mouse session and then play it back exactly as it occured once again
+- Should support all pi4 and pi5 models, although you will need to pass in the exact settings for your keyboard & mouse (using the keyboard/mouse VID, PID and DEV command line options)
 
 ## Requirements
 
 - Python 3.6 or later
 - Root access (required for USB gadget and device grabbing)
 - Raspberry Pi with USB gadget mode support (Pi 400, Pi 500 & Pi 500+)
-- The ONLY port the Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
+- The ONLY port the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
   Since the destination PC's USB ports can't provide enough power to run a Pi400, *you will need a USB C power & data splitter*.
 
   I used this model from Amazon although I an sure several other could work and are available from other retailers. Just make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
@@ -167,7 +168,9 @@ sudo ./py400kb.py --pi500plus --record-macro mymacro.jsonl
 sudo ./py400kb.py --pi500plus --play-macro mymacro.jsonl
 ```
 
-## Troubleshooting
+## Using a differnt keyboard or mouse 
+
+If you want to plug in a differnet keyboard or mouse instead of using one of the presets (--pi400, --pi500, --pi500plus) then you will need to pass in the device's HID, PID and device name. If you are just using a different mouse, for example, you can still use a preset and pass in an override just for the mouse. These commands were tested on Pi OS Bookworm & Trixie.
 
 **Commands to identify a new keyboard or mouse in Pi OS**
 - List keyboards & mice for use wth the --keboard-dev & --mouse-dev arguments:
@@ -175,7 +178,7 @@ sudo ./py400kb.py --pi500plus --play-macro mymacro.jsonl
 ls -l /dev/input/by-id/
 ```
 
-- NOTE: On the comand line make sure you include the full path to the name of the mouse or keyboard. For example:
+IMPORTANT NOTE: On the comand line make sure you include the full path to the name of the mouse or keyboard. For example:
 ```bash
 --keyboard-dev /dev/input/by-id/usb-Raspberry_Pi_Ltd_Pi_500_Keyboard-event-kbd
 ```
@@ -191,6 +194,8 @@ lsusb
 2e8a:0011 Raspberry Pi Ltd Pi 500+ Keyboard (ANSI)
 VID : PID
 ```
+
+## Troubleshooting
 
 **"No devices to forward"**
 - Check that the VID/PID values match your hardware
