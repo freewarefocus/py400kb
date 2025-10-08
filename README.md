@@ -12,7 +12,8 @@ It also supports recording and playing back keyboard and mouse macro files.
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can be overridden
-4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
+4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be addedShould support all pi4 and pi5 models, although you will need to pass in the exact settings for your keyboard & mouse (using the keyboard/mouse VID, PID and DEV command line options)
+
 5. **Improved error handling** - Better error messages & graceful cleanup
 6. **More feedback** - Added additonal status messages and a --help command line option
 7. **Added Macro Record/Playback** - Now supports recording and playing back keyboard and mouse sessions
@@ -31,8 +32,8 @@ It also supports recording and playing back keyboard and mouse macro files.
 
 - Python 3.6 or later
 - Root access (required for USB gadget and device grabbing)
-- Raspberry Pi with USB gadget mode support (Pi 4, Pi 5, Pi 400, Pi 500 & Pi 500+)
-- The ONLY port the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
+- Raspberry Pi with USB C gadget mode support (currently the Pi 4, Pi 5, Pi 400, Pi 500 & Pi 500+)
+- The **ONLY** port on the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB power port.
   Since the destination PC's USB ports can't provide enough power to run any of these, **you will need a USB C power & data splitter**.
 
   I used this model from Amazon, although I am sure several others could work and are available from other retailers. Make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
