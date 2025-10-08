@@ -195,7 +195,7 @@ lsusb
 VID : PID
 ```
 
-NOTE: Since these are hex values you need to append '0x' ti these numbers on the command line (or convert them to decimal):
+NOTE: Since these are hex values you need to append '0x' to these numbers on the command line (or convert them to decimal):
 ```bash
 --keyboard-vid 0x2e8a --keyboard-pid 0x0011
 ```
