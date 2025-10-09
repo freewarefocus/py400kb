@@ -125,12 +125,12 @@ While running:
 
 ### Examples
 
-**Full Custom keyboard configuration**
+**Custom Keyboard configuration**
 ```bash
 sudo ./py400kb.py --keyboard-vid 0x045e --keyboard-pid 0x000b --keyboard-dev /dev/input/by-id/usb-045e_Microsoft_Natural_Keyboard_Elite-event-kbd
 ```
 
-**Mouse and Keybord custom configuration:**
+**Custom Mouse and Keyboard configuration:**
 ```bash
 sudo ./py400kb.py \
     --keyboard-vid 0x2e8a \
@@ -156,7 +156,7 @@ sudo ./py400kb.py --pi500plus --record-macro mymacro.jsonl
 sudo ./py400kb.py --pi500plus --play-macro mymacro.jsonl
 ```
 
-## Using a different keyboard and/or mouse 
+## How to use a different Keyboard and/or Mouse 
 
 If you want to plug in a differnet keyboard or mouse instead of using one of the presets (--pi400, --pi500, --pi500plus) then you will need to pass in the device's HID, PID and device name. If you are just using a different mouse, for example, you can still use a preset and pass in an override just for the mouse. These commands were tested on Pi OS Bookworm & Trixie.
 
@@ -188,7 +188,7 @@ NOTE: Since these are hex values you need to pre-append '0x' to these numbers on
 --keyboard-vid 0x2e8a --keyboard-pid 0x0011
 ```
 
-**Full Custom Mouse Example**
+**Full Custom Mouse Walk-Through**
 
 On a Raspberry Pi 500+ I am going to use the built in keyboard but I have a different mouse than the official Raspberry Pi one. This means I can use the --pi500plus command line option to automatically select the keyboard but I will need to override the mouse setting. Here is how I do that:
 
