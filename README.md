@@ -24,14 +24,14 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 - Command-line overrides for all device parameters for custom mice & keyboards
 - The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
 - The --record-macro {filename} and --play-macro {filename} allow you to record a keyboard & mouse session and then play it back exactly as it occurred once again
-- Advanced Use: The ability to spoof other keyboards using the --spoof-kb- VID, PID, REV command line options. This does NOT change how the Pi's keyboard is configured or operates, it simply tells the destination PC that you are using a different keyboard than you actually are. If you don't know why you would ever need to do that, then ignore these options - these are not the droids you are looking for.
+- Advanced Use: The ability to spoof other keyboards using the --spoof-kb- VID, PID, REV command line options. This does NOT change how the Pi's keyboard is configured or operates; it simply tells the destination PC that you are using a different keyboard than you actually are. If you don't know why you would ever need to do that, then ignore these options - these are not the droids you are looking for.
 
 ## Requirements
 
 - Python 3.6 or later
 - Root access (required for USB gadget and device grabbing)
 - Raspberry Pi with USB C gadget mode support (currently the Pi 4, Pi 5, Pi 400, Pi 500 & Pi 500+)
-- The **ONLY** port on the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can use as a HID device is the USB C power port.
+- The **ONLY** port on the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can be used as a HID device is the USB C power port.
   Since the destination PC's USB ports can't provide enough power to run any of these, **you will need a USB C power & data splitter**.
 
   I used this model from Amazon, although I am sure several others could work and are available from other retailers. Make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
@@ -41,12 +41,12 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
   Amake USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging: 
   www.amazon.com/dp/B0F6SRN24Y
 
-  For the USB A to A cable I used this model (again many brands and vendors should work): 
+  For the USB A to A cable, I used this model (again, many brands and vendors should work): 
   
-  SB 3.0 Male to Male Cable 3Ft,USB to USB Cable with Gold-Plated Connector
+  SB 3.0 Male to Male Cable 3Ft, USB to USB Cable with Gold-Plated Connector
   www.amazon.com/Jelly-Tang-USB-3-0-3Ft/dp/B07KJFWYXF
 
-  For testing I used the above cables & adapters along with an official Raspberry Pi 45 watt USB C power adapter, the official Raspberry Pi USB mouse and a Pi400 & a Pi500+. Although this combination of equipment worked fine for me:
+  For testing, I used the above cables & adapters along with an official Raspberry Pi 45 watt USB C power adapter, the official Raspberry Pi USB mouse and a Pi400 & a Pi500+. Although this combination of equipment worked fine for me:
 
    **I am not responsible for damage caused by attempting to turn your Pi into an external keyboard & mouse** 
    
@@ -129,7 +129,7 @@ These values are basically bogus information ONLY passed to the destination PC a
 
 - `--spoof-kb-vid FAKE VID` - Keyboard vendor ID (hex or decimal, e.g., 0x2a8f or 10895)
 - `--spoof-kb-pid FAKE PID` - Keyboard product ID (hex or decimal)
-- `--spoof-kb-rev FAKE REV` - Keyboard revsion number (hex or decimal)
+- `--spoof-kb-rev FAKE REV` - Keyboard revision number (hex or decimal)
 
 #### Other Options
 - `--no-usb` - Disable USB output (testing/debugging mode)
@@ -171,10 +171,10 @@ sudo ./py400kb.py --pi500plus --play-macro mymacro.jsonl
 
 ## How to use a different Keyboard and/or Mouse 
 
-If you want to plug in a differnet keyboard or mouse instead of using one of the presets (--pi400, --pi500, --pi500plus) then you will need to pass in the device's HID, PID and device name. If you are just using a different mouse, for example, you can still use a preset and pass in an override just for the mouse. These commands were tested on Pi OS Bookworm & Trixie.
+If you want to plug in a different keyboard or mouse instead of using one of the presets (--pi400, --pi500, --pi500plus), then you will need to pass in the device's HID, PID and device name. If you are just using a different mouse, for example, you can still use a preset and pass in an override just for the mouse. These commands were tested on Pi OS Bookworm & Trixie.
 
 **Commands to identify a new keyboard or mouse in Pi OS**
-- List keyboards & mice for use wth the --keboard-dev & --mouse-dev arguments. Look for the one with "event" in it's name:
+- List keyboards & mice for use wth the --keboard-dev & --mouse-dev arguments. Look for the one with "event" in its name:
 ```bash
 ls -l /dev/input/by-id/
 ```
@@ -196,22 +196,22 @@ lsusb
 VID : PID
 ```
 
-NOTE: Since these are hex values you need to pre-append '0x' to these numbers on the command line (or convert them to decimal):
+NOTE: Since these are hex values, you need to pre-append '0x' to these numbers on the command line (or convert them to decimal):
 ```bash
 --keyboard-vid 0x2e8a --keyboard-pid 0x0011
 ```
 
 **Full Custom Mouse Walk-Through**
 
-On a Raspberry Pi 500+ I am going to use the built in keyboard but I have a different mouse than the official Raspberry Pi one. This means I can use the --pi500plus command line option to automatically select the keyboard but I will need to override the mouse setting. Here is how I do that:
+On a Raspberry Pi 500+, I am going to use the built-in keyboard, but I have a different mouse than the official Raspberry Pi one. This means I can use the --pi500plus command line option to automatically select the keyboard but I will need to override the mouse setting. Here is how I do that:
 
 - Run the ls -l /dev/input/by-id/ and lsusb commands and identify the mouse's device name (look for "event"). From the lsusb you can get the device's VID (first number) and PID (second number):
 
 ![Screenshot](./images/custom_mouse_config1.png)
 
-- On the command line I make sure to include the --pi500plus argument to identify the keyboard, but then add the custom mouse's VID, PID and DEV commands.
+- On the command line, I make sure to include the --pi500plus argument to identify the keyboard, but then add the custom mouse's VID, PID and DEV commands.
 
-Note that I include the "0x" before the VID and PID numbers (because they are hexidecimal) and the path "/dev/input/by-id/" before the mouse's device name:
+Note that I include the "0x" before the VID and PID numbers (because they are hexadecimal) and the path "/dev/input/by-id/" before the mouse's device name:
 
 ![Screenshot](./images/custom_mouse_config2.png)
 
