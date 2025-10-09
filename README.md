@@ -1,7 +1,7 @@
 # Use a Raspberry Pi 4, 5, 400, 500 or 500+ as a HID USB Mouse &amp; Keyboard
 
 This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
-The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add the ability to define a custom keyboard or mouse without having to recompile.
+The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add the ability to define a custom keyboard or mouse without having to recompile.run-pi500.sh
 
 
 This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer. You can use a handy preset for the pi400, 500 or 500+ and the official Raspberry Pi Mouse or pass in custom values for the keyboard & mouse to support newer models or custom hardware. It also supports recording and playing back keyboard and mouse macro files.
@@ -212,6 +212,34 @@ On a Raspberry Pi 500+ I am going to use the built in keyboard but I have a diff
 Note that I include the "0x" before the VID and PID numbers (because they are hexidecimal) and the path "/dev/input/by-id/" before the mouse's device name:
 
 ![Screenshot](./images/custom_mouse_config2.png)
+
+- So you don't have to type this line in each time, you can create a bash (command) file and name it something like "my-py400.sh" on your desktop:
+
+```bash
+#!/bin/bash
+# ---------------------------------------------------------------------------
+# my-py400kb.sh
+# Run py400kb.py with the Pi 500+ keyboard and custom mouse device settings
+# ---------------------------------------------------------------------------
+
+sudo ./py400kb.py \
+    --pi500plus \
+    --mouse-vid 0x04fc \
+    --mouse-pid 0x0013 \
+    --mouse-dev /dev/input/by-id/usb-04fc_USB_OpticalWheel_Mouse-event-mouse
+```
+
+- Make it executable with this terminal commmand or using the Pi OS GUI:
+
+```bash
+chmod +x my-pi400b.sh
+```
+
+- And run it like this:
+
+```bash
+./my-py400kb.sh
+```
 
 ## Troubleshooting
 
