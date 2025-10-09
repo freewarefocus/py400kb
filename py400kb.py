@@ -502,70 +502,7 @@ class HIDForwarder:
                     return 1
             try:
                 return self._play_macro(self.play_path)
-            finally:#!/usr/bin/env python3
-"""
-Py400kb USB HID Forwarder
-Forwards keyboard and mouse input from PIx00 computers to USB gadget mode
-Currently supports Pi 400, Pi 500, and Pi 500+
-This is a Python re-write of the C program pi400kb by Gadgetoid
-Released under the MIT License
-"""
-
-import argparse
-import errno
-import fcntl
-import os
-import signal
-import struct
-import sys
-import time
-import subprocess
-from pathlib import Path
-from typing import Optional, Tuple
-
-# Additional errno constants for handling specific errors
-EPIPE = 32
-ESHUTDOWN = 108 # Usually destination PC not connected to USB cable
-
-# HID Report Descriptor combining keyboard and mouse
-REPORT_DESC = bytes([
-    # Keyboard Report (Report ID 1)
-    0x05, 0x01,        # Usage Page (Generic Desktop Ctrls)
-    0x09, 0x06,        # Usage (Keyboard)
-    0xA1, 0x01,        # Collection (Application)
-    0x85, 0x01,        #   Report ID (1)
-    0x05, 0x07,        #   Usage Page (Kbrd/Keypad)
-    0x19, 0xE0,        #   Usage Minimum (0xE0)
-    0x29, 0xE7,        #   Usage Maximum (0xE7)
-    0x15, 0x00,        #   Logical Minimum (0)
-    0x25, 0x01,        #   Logical Maximum (1)
-    0x75, 0x01,        #   Report Size (1)
-    0x95, 0x08,        #   Report Count (8)
-    0x81, 0x02,        #   Input (Data,Var,Abs)
-    0x95, 0x01,        #   Report Count (1)
-    0x75, 0x08,        #   Report Size (8)
-    0x81, 0x01,        #   Input (Const,Array,Abs)
-    0x95, 0x03,        #   Report Count (3)
-    0x75, 0x01,        #   Report Size (1)
-    0x05, 0x08,        #   Usage Page (LEDs)
-    0x19, 0x01,        #   Usage Minimum (Num Lock)
-    0x29, 0x03,        #   Usage Maximum (Scroll Lock)
-    0x91, 0x02,        #   Output (Data,Var,Abs)
-    0x95, 0x05,        #   Report Count (5)
-    0x75, 0x01,        #   Report Size (1)
-    0x91, 0x01,        #   Output (Const,Array,Abs)
-    0x95, 0x06,        #   Report Count (6)
-    0x75, 0x08,        #   Report Size (8)
-    0x15, 0x00,        #   Logical Minimum (0)
-    0x26, 0xFF, 0x00,  #   Logical Maximum (255)
-    0x05, 0x07,        #   Usage Page (Kbrd/Keypad)
-    0x19, 0x00,        #   Usage Minimum (0x00)
-    0x2A, 0xFF, 0x00,  #   Usage Maximum (0xFF)
-    0x81, 0x00,        #   Input (Data,Array,Abs)
-    0xC0,              # End Collection
-
-    # Mouse Report (Report ID 2)
-
+            finally:
                 if self.hid_output_fd is not None:
                     os.close(self.hid_output_fd)
                 if not self.no_usb:
@@ -770,18 +707,18 @@ def main():
     parser.add_argument('--mouse-dev', type=str,
                        help='Mouse device path')
    
-     # Macro options (mutually exclusive)
-    macro_group = parser.add_mutually_exclusive_group()
-    macro_group.add_argument('--record-macro', metavar='FILE', type=str,
-                             help='Record a macro file in JSONL format of keyboard/mouse with timing')
-    macro_group.add_argument('--play-macro', metavar='FILE', type=str,
-                             help='Play back a recorded macro JSONL file to USB and exit')  
-   
     # Output options
     parser.add_argument('--no-usb', action='store_true',
                        help='Disable USB output (testing mode)')
     parser.add_argument('--hide-events', action='store_true',
-                   help='Hide the keyboard and mouse event output on screen (macros will still record)')
+                   help='Hide the keyboard and mouse event output on screen')
+
+    # Macro options (mutually exclusive)
+    macro_group = parser.add_mutually_exclusive_group()
+    macro_group.add_argument('--record-macro', metavar='FILE', type=str,
+                             help='Record a macro (JSONL) of keyboard/mouse with timing')
+    macro_group.add_argument('--play-macro', metavar='FILE', type=str,
+                             help='Play back a macro (JSONL) to USB and exit')
     
     args = parser.parse_args()
     
