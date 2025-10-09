@@ -76,18 +76,18 @@ sudo python py400kb.py
 
 ### Basic Usage
 
-**Pi 400 (default):**
+**Pi 400 (default) and official Raspberry Pi Mouse:**
 ```bash
 sudo ./py400kb.py --pi400
 ```
 
-**Pi 500:**
+**Pi 500 and official Raspberry Pi Mouse:**
 ```bash
 
 sudo ./py400kb.py --pi500
 ```
 
-**Pi 500+ (pi500plus):**
+**Pi 500+ (pi500plus) and official Raspberry Pi Mouse:**
 ```bash
 sudo ./py400kb.py --pi500plus
 ```
