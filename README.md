@@ -3,6 +3,7 @@
 This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
 The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add flexibility and future-proofing without having to recompile.
 
+
 This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
 You can use a handy preset for the pi400, 500 or 500+ or pass in custom values for the keyboard & mouse to support newer models or custom hardware.
 It also supports recording and playing back keyboard and mouse macro files.
@@ -84,6 +85,7 @@ sudo ./py400kb.py --pi400
 
 **Pi 500:**
 ```bash
+
 sudo ./py400kb.py --pi500
 ```
 
@@ -172,7 +174,7 @@ sudo ./py400kb.py --pi500plus --play-macro mymacro.jsonl
 If you want to plug in a differnet keyboard or mouse instead of using one of the presets (--pi400, --pi500, --pi500plus) then you will need to pass in the device's HID, PID and device name. If you are just using a different mouse, for example, you can still use a preset and pass in an override just for the mouse. These commands were tested on Pi OS Bookworm & Trixie.
 
 **Commands to identify a new keyboard or mouse in Pi OS**
-- List keyboards & mice for use wth the --keboard-dev & --mouse-dev arguments:
+- List keyboards & mice for use wth the --keboard-dev & --mouse-dev arguments. Look for the one with "event" in it's name:
 ```bash
 ls -l /dev/input/by-id/
 ```
@@ -200,9 +202,16 @@ NOTE: Since these are hex values you need to pre-append '0x' to these numbers on
 ```
 
 **Custom Mouse Example**
-- Run the ls -l /dev/input/by-id/ and lsusb commands and identify the mouse
+On a Raspberry Pi 500+ I am going to use the built in keyboard but I have a different mouse than the official Raspberry Pi one. This means I can use the --pi500plus command line option to automatically select the keyboard but I will need to override the mouse setting. Here is how I do that:
+
+- Run the ls -l /dev/input/by-id/ and lsusb commands and identify the mouse's device name (look for "event") and VID (first number) and PID (second number):
 
 ![Screenshot](./images/custom_mouse_config1.png)
+
+- On the command line I make sure that I include the --pi500plus to identify the keyboard but then add the mouse's VID, PID and DEV name.
+Note that I include the "0x" before the VID and PID numbers (because they are hexidecimal) and the path "/dev/input/by-id/" before the mouse's device name:
+
+![Screenshot](./images/custom_mouse_config2.png)
 
 ## Troubleshooting
 
