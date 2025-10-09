@@ -229,7 +229,7 @@ sudo ./py400kb.py \
     --mouse-dev /dev/input/by-id/usb-04fc_USB_OpticalWheel_Mouse-event-mouse
 ```
 
-- Make it executable with this terminal commmand or using the Pi OS GUI:
+- Make it executable with this terminal command or using the Pi OS GUI:
 
 ```bash
 chmod +x my-py400kb.sh
