@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Py400kb USB HID Forwarder
+Py400kb USB HID Forwarder Version 1.0
 Forwards keyboard and mouse input from PIx00 computers to USB gadget mode
 Currently supports Pi 400, Pi 500, and Pi 500+
 This is a Python re-write of the C program pi400kb by Gadgetoid
