@@ -24,7 +24,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 - Command-line overrides for all device parameters for custom mice & keyboards
 - The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
 - The --record-macro {filename} and --play-macro {filename} allow you to record a keyboard & mouse session and then play it back exactly as it occurred once again
-- Advanced Use: The ability to spoof other keyboards using the --spoof-kb- VID, PID, REV command line options
+- Advanced Use: The ability to spoof other keyboards using the --spoof-kb- VID, PID, REV command line options. This does NOT change how the Pi's keyboard is configured or operates, it simply tells the destination PC that you are using a different keyboard than you actually are. If you don't know why you would ever need to do that, then ignore these options - these are not the droids you are looking for.
 
 ## Requirements
 
