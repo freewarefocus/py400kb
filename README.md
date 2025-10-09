@@ -3,7 +3,7 @@
 This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://github.com/Gadgetoid/pi400kb/).
 The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add flexibility and future-proofing without having to recompile.
 
-This program allows a Raspberry pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
+This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer.
 You can also pass in custom values for the keyboard & mouse to support newer models or custom hardware.
 It also supports recording and playing back keyboard and mouse macro files.
 
