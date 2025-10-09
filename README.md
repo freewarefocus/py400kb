@@ -57,7 +57,7 @@ It also supports recording and playing back keyboard and mouse macro files.
 dtoverlay=dwc2,dr_mode=peripheral
 ```
 
-2) Reboot to have the config.txt change take effect
+2) Reboot to have the config.txt change take effectname
 
 3) Ensure the required kernel modules are available:
 ```bash
@@ -208,7 +208,8 @@ On a Raspberry Pi 500+ I am going to use the built in keyboard but I have a diff
 
 ![Screenshot](./images/custom_mouse_config1.png)
 
-- On the command line I make sure that I include the --pi500plus to identify the keyboard but then add the mouse's VID, PID and DEV name.
+- On the command line I make sure to include the --pi500plus argument to identify the keyboard, but then add the custom mouse's VID, PID and DEV commands.
+
 Note that I include the "0x" before the VID and PID numbers (because they are hexidecimal) and the path "/dev/input/by-id/" before the mouse's device name:
 
 ![Screenshot](./images/custom_mouse_config2.png)
