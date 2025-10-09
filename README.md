@@ -213,7 +213,7 @@ Note that I include the "0x" before the VID and PID numbers (because they are he
 
 ![Screenshot](./images/custom_mouse_config2.png)
 
-- So you don't have to type this line in each time, you can create a bash (command) file and name it something like "my-py400.sh" on your desktop:
+- So you don't have to type this line in each time, you can create a bash (command) file and name it something like "my-py400kb.sh" on your desktop:
 
 ```bash
 #!/bin/bash
