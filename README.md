@@ -54,7 +54,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 dtoverlay=dwc2,dr_mode=peripheral
 ```
 
-2) Reboot to have the config.txt change take effectname
+2) Reboot to have the config.txt change take effect
 
 3) Ensure the required kernel modules are available:
 ```bash
