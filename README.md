@@ -118,6 +118,14 @@ While running:
 - `--record-macro filename` - Records a macro to a file in JSONL format
 - `--play-macro filename` - Plays back a recorded macro file and then quits afer playback
 
+#### ADVANCED USE ONLY: Keyboard Spoofing Options
+NOTE: You will normally NEVER need to set these unless you specifically need to imitate another keyboard on the destination PC.
+These values are basically bogus information ONLY passed to the destination PC and are NOT used to configure the Pi in any way!
+
+- `--spoof-kb-vid FAKE VID` - Keyboard vendor ID (hex or decimal, e.g., 0x2a8f or 10895)
+- `--spoof-kb-pid FAKE PID` - Keyboard product ID (hex or decimal)
+- `--spoof-kb-rev FAKE REV` - Keyboard revsion number (hex or decimal)
+
 #### Other Options
 - `--no-usb` - Disable USB output (testing/debugging mode)
 - `--hide-events` - Don't show mouse & keyboard raw input on the screen
