@@ -232,7 +232,7 @@ sudo ./py400kb.py \
 - Make it executable with this terminal commmand or using the Pi OS GUI:
 
 ```bash
-chmod +x my-pi400b.sh
+chmod +x my-py400kb.sh
 ```
 
 - And run it like this:
