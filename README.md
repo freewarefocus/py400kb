@@ -125,22 +125,12 @@ While running:
 
 ### Examples
 
-**Custom keyboard VID/PID:**
-```bash
-sudo ./py400kb.py --keyboard-vid 0x2a8a --keyboard-pid 0x0210
-```
-
-**Override specific device path:**
-```bash
-sudo ./py400kb.py --pi500 --keyboard-dev /dev/input/by-id/custom-keyboard-path
-```
-
-**Custom keyboard configuration**
+**Full Custom keyboard configuration**
 ```bash
 sudo ./py400kb.py --keyboard-vid 0x045e --keyboard-pid 0x000b --keyboard-dev /dev/input/by-id/usb-045e_Microsoft_Natural_Keyboard_Elite-event-kbd
 ```
 
-**Complete custom configuration:**
+**Mouse and Keybord custom configuration:**
 ```bash
 sudo ./py400kb.py \
     --keyboard-vid 0x2e8a \
