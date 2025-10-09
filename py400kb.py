@@ -296,9 +296,9 @@ class HIDForwarder:
         self.hid_output_fd: Optional[int] = None
         
         # USB gadget VID/PID/REV (will be set by main before run())
-        self.usb_vid: int = config['keyboard_vid']
-        self.usb_pid: int = config['keyboard_pid']
-        self.usb_rev: int = 0x0001
+        self.spoof_kb_vid: int = config['keyboard_vid']
+        self.spoof_kb_pid: int = config['keyboard_pid']
+        self.spoof_kb_rev: int = 0x0001
         
         self.gadget = USBGadget()
         
@@ -489,7 +489,7 @@ class HIDForwarder:
         # Playback mode: skip device discovery and live reading
         if self.play_path:
             if not self.no_usb:
-                if not self.gadget.init(self.usb_vid, self.usb_pid, self.usb_rev):
+                if not self.gadget.init(self.spoof_kb_vid, self.spoof_kb_pid, self.spoof_kb_rev):
                     print("Failed to initialize USB gadget")
                     return 1
                 # open hidg0
@@ -537,44 +537,8 @@ class HIDForwarder:
             return 1
         
         # Initialize USB gadget
-        if not self.no_usb:#!/usr/bin/env python3
-"""
-Py400kb USB HID Forwarder
-Forwards keyboard and mouse input from PIx00 computers to USB gadget mode
-Currently supports Pi 400, Pi 500, and Pi 500+
-This is a Python re-write of the C program pi400kb by Gadgetoid
-Released under the MIT License
-"""
-
-import argparse
-import json
-import errno
-import fcntl
-import os
-import select
-import signal
-import struct
-import sys
-import time
-import subprocess
-from pathlib import Path
-from typing import Optional
-
-# Additional errno constants for handling specific errors
-EPIPE = 32
-ESHUTDOWN = 108 # Usually destination PC not connected to USB cable
-
-# HID Report Descriptor combining keyboard and mouse
-REPORT_DESC = bytes([
-    # Keyboard Report (Report ID 1)
-    0x05, 0x01,        # Usage Page (Generic Desktop Ctrls)
-    0x09, 0x06,        # Usage (Keyboard)
-    0xA1, 0x01,        # Collection (Application)
-    0x85, 0x01,        #   Report ID (1)
-    0x05, 0x07,        #   Usage Page (Kbrd/Keypad)
-    0x19, 0xE0,        #   Usage Minimum (0xE0)
-
-            if not self.gadget.init(self.usb_vid, self.usb_pid, self.usb_rev):
+        if not self.no_usb:
+            if not self.gadget.init(self.spoof_kb_vid, self.spoof_kb_pid, self.spoof_kb_rev):
                 print("Failed to initialize USB gadget")
                 return 1
             
@@ -749,12 +713,12 @@ def main():
                        help='Mouse device path')
     
     # USB Gadget overrides
-    parser.add_argument('--usb-vid', type=lambda x: int(x, 0),
-                       help='USB gadget vendor ID (hex or decimal) - overrides keyboard VID')
-    parser.add_argument('--usb-pid', type=lambda x: int(x, 0),
-                       help='USB gadget product ID (hex or decimal) - overrides keyboard PID')
-    parser.add_argument('--usb-rev', type=lambda x: int(x, 0),
-                       help='USB gadget revision/bcdDevice (hex or decimal) - default is 0x0001')
+    parser.add_argument('--spoof-kb-vid', type=lambda x: int(x, 0),
+                       help='Spoof USB gadget vendor ID (hex or decimal) - overrides keyboard VID')
+    parser.add_argument('--spoof-kb-pid', type=lambda x: int(x, 0),
+                       help='Spoof USB gadget product ID (hex or decimal) - overrides keyboard PID')
+    parser.add_argument('--spoof-kb-rev', type=lambda x: int(x, 0),
+                       help='Spoof USB gadget revision/bcdDevice (hex or decimal) - default is 0x0001')
    
     # Output options
     parser.add_argument('--no-usb', action='store_true',
@@ -799,17 +763,17 @@ def main():
         config['mouse_dev'] = args.mouse_dev
     
     # Determine USB gadget VID/PID (defaults to keyboard VID/PID)
-    usb_vid = config['keyboard_vid']
-    usb_pid = config['keyboard_pid']
-    usb_rev = 0x0001  # Default revision
+    spoof_kb_vid = config['keyboard_vid']
+    spoof_kb_pid = config['keyboard_pid']
+    spoof_kb_rev = 0x0001  # Default revision
     
     # Apply USB gadget overrides if provided
-    if args.usb_vid is not None:
-        usb_vid = args.usb_vid
-    if args.usb_pid is not None:
-        usb_pid = args.usb_pid
-    if args.usb_rev is not None:
-        usb_rev = args.usb_rev
+    if args.spoof_kb_vid is not None:
+        spoof_kb_vid = args.spoof_kb_vid
+    if args.spoof_kb_pid is not None:
+        spoof_kb_pid = args.spoof_kb_pid
+    if args.spoof_kb_rev is not None:
+        spoof_kb_rev = args.spoof_kb_rev
     
     # Check for root permissions
     if os.geteuid() != 0:
@@ -819,12 +783,11 @@ def main():
     # Run forwarder
     forwarder = HIDForwarder(config, no_usb=args.no_usb, hide_events=args.hide_events,
                             record_path=args.record_macro, play_path=args.play_macro)
-    forwarder.usb_vid = usb_vid
-    forwarder.usb_pid = usb_pid
-    forwarder.usb_rev = usb_rev
+    forwarder.spoof_kb_vid = spoof_kb_vid
+    forwarder.spoof_kb_pid = spoof_kb_pid
+    forwarder.spoof_kb_rev = spoof_kb_rev
 
     return forwarder.run()
 
 if __name__ == '__main__':
     sys.exit(main())
-
