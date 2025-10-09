@@ -202,6 +202,7 @@ NOTE: Since these are hex values you need to pre-append '0x' to these numbers on
 ```
 
 **Custom Mouse Example**
+
 On a Raspberry Pi 500+ I am going to use the built in keyboard but I have a different mouse than the official Raspberry Pi one. This means I can use the --pi500plus command line option to automatically select the keyboard but I will need to override the mouse setting. Here is how I do that:
 
 - Run the ls -l /dev/input/by-id/ and lsusb commands and identify the mouse's device name (look for "event") and VID (first number) and PID (second number):
