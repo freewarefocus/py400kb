@@ -49,7 +49,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 
 ## Installation
 
-1) Add the following to your boot/firmware/config.txt file just below [all] section at the bottom```
+1) Add the following to your boot/firmware/config.txt file just below [all] section at the bottom
 ```bashoutput
 dtoverlay=dwc2,dr_mode=peripheral
 ```
