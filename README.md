@@ -199,6 +199,11 @@ NOTE: Since these are hex values you need to pre-append '0x' to these numbers on
 --keyboard-vid 0x2e8a --keyboard-pid 0x0011
 ```
 
+**Custom Mouse Example**
+- Run the ls -l /dev/input/by-id/ and lsusb commands and identify the mouse
+
+![Screenshot](./images/custom_mouse_config1.png)
+
 ## Troubleshooting
 
 **"No devices to forward"**
