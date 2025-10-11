@@ -247,6 +247,11 @@ chmod +x my-py400kb.sh
 
 ## Troubleshooting
 
+**Incompatible mice and keyboards**
+- In my testing I found that certain mice & keyboards simply don't work. So far it seems to just be those which pull double duty and act as two devices at once. While you may not think your mouse is also a 'keyboard', that is exactly how the Pi sees the Corsair M55 RGB Pro gaming mouse (it has extra buttons on the side). No matter what "DEV" I pick (it appears as several) it simply doesn't register mouse moves correctly. I also had no luck using the Logitech K400r wireless dongle keyboard/trackpad combo device, nor the Logitech (Logi) K270 wireless dongle mouse and keyboard. 
+
+- However cheaper wired USB no-name, office standard Logitechs, etc. mice and keyboards all seem to work well. Even an anicent Microsoft Natural PS2 keyboard with a USB adapter worked. Of course, if you want a "guaranteed to work" mouse and keyboard, just get an official Raspbery Pi Mouse and a pi400, pi500 or pi500+. Although the pi500+ is the most expensive option, it is a delight to type on and was the inspiration of this entire project.
+
 **"No devices to forward"**
 - Check that the VID/PID values match your hardware
 - Run `lsusb` to find the correct vendor/product IDs
@@ -266,8 +271,6 @@ chmod +x my-py400kb.sh
 - The program will continue to run even if the USB cable is not connected to the destination computer
 - Connect the USB cable to the destination computer to start forwarding input
 
-**I tried all that but my mouse doesn't work!**
-- In my testing I found that certain mice simply don't work. So far it seems to just be those which pull double duty and act as two devices at once. While you may not think your mouse is also a 'keyboard', that is exactly how the Pi sees the Corsair M55 RGB Pro gaming mouse (it has extra buttons on the side). No matter what "DEV" I pick (it appears as several) it simply doesn't register mouse moves correctly. I also had no luck using the trackpad mouse on a Logitech K400r wireless dongle keyboard/trackpad combo device. However cheaper no-name, office standard Logitechs, etc. mice all seem to work well. If all else fails, the offical Raspberry Pi mouse has built in support and is inexpensive (if just a passible mouse).
 
 ## Thanks & Contributions
 This project would not have been possible without the coding work of Gadgetoid and his original C version of pi400kb. This Python program is closely based on the core of the original code.
