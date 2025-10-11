@@ -52,8 +52,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
    
    Always check adapters and cables to make sure they are providing the correct power to the correct places.
 
-## InstallationM: 20 01 02 00
-
+## Installation
 
 1) Add the following to your boot/firmware/config.txt file just below [all] section at the bottom
 ```bashoutput
