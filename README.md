@@ -250,7 +250,7 @@ chmod +x my-py400kb.sh
 **Incompatible mice and keyboards**
 - In my testing I found that certain mice & keyboards simply don't work. So far it seems to just be those which pull double duty and act as two devices at once. While you may not think your mouse is also a 'keyboard', that is exactly how the Pi sees the Corsair M55 RGB Pro gaming mouse (it has extra buttons on the side). No matter what "DEV" I pick (it appears as several) it simply doesn't register mouse moves correctly. I also had no luck using the Logitech K400r wireless dongle keyboard/trackpad combo device, nor the Logitech (Logi) K270 wireless dongle mouse and keyboard. 
 
-- However cheaper wired USB no-name, office standard Logitechs, etc. mice and keyboards all seem to work well. Even an ancient Microsoft Natural PS2 keyboard with a USB adapter worked. Of course, if you want a "guaranteed to work" mouse and keyboard, just get an official Raspbery Pi Mouse and a pi400, pi500 or pi500+. Although the pi500+ is the most expensive option, it is a delight to type on and was the inspiration of this entire project.
+- However cheaper wired USB no-name, office standard Logitechs, etc. mice and keyboards all seem to work well. Even an ancient Microsoft Natural PS2 keyboard with a USB adapter worked. Of course, if you want a "guaranteed to work" mouse and keyboard, just get an official Raspbery Pi Mouse and a pi400, pi500 or pi500+. Although the pi500+ is the most expensive option, it is a delight to type on with a more standard keyboard layout and responsive Gateron KS-33 Blues - it was the inspiration of this entire project.
 
 **"No devices to forward"**
 - Check that the VID/PID values match your hardware
