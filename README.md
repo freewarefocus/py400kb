@@ -245,12 +245,25 @@ chmod +x my-py400kb.sh
 ./my-py400kb.sh
 ```
 
-## Troubleshooting
+## Hardware Tested
 
 **Incompatible mice and keyboards**
 - In my testing I found that certain mice & keyboards simply don't work. So far it seems to just be those which pull double duty and act as two devices at once. While you may not think your mouse is also a 'keyboard', that is exactly how the Pi sees the Corsair M55 RGB Pro gaming mouse (it has extra buttons on the side). No matter what "DEV" I pick (it appears as several) it simply doesn't register mouse moves correctly. I also had no luck using the Logitech K400r wireless dongle keyboard/trackpad combo device, nor the Logitech (Logi) K270 wireless dongle mouse and keyboard. 
 
+**Compatible mice and keyboards**
 - However cheaper wired USB no-name, office standard Logitechs, etc. mice and keyboards all seem to work well. Even an ancient Microsoft Natural PS2 keyboard with a USB adapter worked. Of course, if you want a "guaranteed to work" mouse and keyboard, just get an official Raspbery Pi Mouse and a pi400, pi500 or pi500+. Although the pi500+ is the most expensive option, it is a delight to type on with a more standard keyboard layout and responsive Gateron KS-33 Blues - it was the inspiration of this entire project.
+
+**USB C to OTG Splitters**
+
+Recommended - Working on pi400 and pi500+: (Recommended Above) "AMAKE USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging,Suitable for iPhone 15/15 Pro Max,MacBook Pro Air,Galaxy S24,Pixel 7"
+https://www.amazon.com/dp/B0F6SRN24Y
+
+Not Recommended - Works on pi400 BUT pi500+ complains the (fully compliant) 45 watt USB C power adapter cannot provide a full 5 watts. It appears this adpater drops a fair amount of power during pass-through, so altought it works as a keyboard/mouse splitter, it isn't recommended.
+"MOGOOD USB C Splitter Type C Y Splitter Cable(NOT for Monitor) C Male to 2USB-C Female Cord (Charging Split NOT Supported) Double USB C Port Hub for Mac,Xbox One,PS5,Quest3"
+https://www.amazon.com/dp/B0CB3M46Y5?
+ ![Screenshot](./images/MOGOOD.jpg)
+
+## Troubleshooting
 
 **"No devices to forward"**
 - Check that the VID/PID values match your hardware
