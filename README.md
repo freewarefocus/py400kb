@@ -251,7 +251,7 @@ chmod +x my-py400kb.sh
 **Compatible mice and keyboards**
 - However cheaper wired USB no-name, office standard Logitechs, etc. mice and keyboards all seem to work well. Even an ancient Microsoft Natural PS2 keyboard with a USB adapter worked. Of course, if you want a "guaranteed to work" mouse and keyboard, just get an official Raspbery Pi Mouse and a pi400, pi500 or pi500+. Although the pi500+ is the most expensive option, it is a delight to type on with a more standard keyboard layout and responsive Gateron KS-33 Blues - it was the inspiration of this entire project.
 
-**USB C to OTG Splitters**
+**RECOMMENDED USB C to OTG Splitters**
 
 RECOMMENDED - Working on pi400 and pi500+: (as mentioned above) "AMAKE USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging,Suitable for iPhone 15/15 Pro Max,MacBook Pro Air,Galaxy S24,Pixel 7"
 https://www.amazon.com/dp/B0F6SRN24Y
@@ -260,6 +260,9 @@ https://www.amazon.com/dp/B0F6SRN24Y
   <img src="./images/AMAKE.jpg" alt="Screenshot" width="300">
 </a>
 
+---
+
+**Tested but NOT Recommended USB C to OTG Splitters**
 
 *NOT Recommended* - Works on pi400 BUT pi500+ complains the (fully compliant) 45 watt USB C power adapter cannot provide a full 5 watts. It appears this adpater drops a fair amount of power during pass-through, so although it works as a keyboard/mouse splitter, it isn't recommended.
 
