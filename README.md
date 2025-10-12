@@ -41,11 +41,6 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
   Amake USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging: 
   www.amazon.com/dp/B0F6SRN24Y
 
-<a href="./images/AMAKE.jpg">
-  <img src="./images/AMAKE.jpg" alt="Screenshot" width="300">
-</a>
-
-
   For the USB A to A cable, I used this model (again, many brands and vendors should work): 
   
   SB 3.0 Male to Male Cable 3Ft, USB to USB Cable with Gold-Plated Connector
@@ -260,6 +255,11 @@ chmod +x my-py400kb.sh
 
 RECOMMENDED - Working on pi400 and pi500+: (as mentioned above) "AMAKE USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging,Suitable for iPhone 15/15 Pro Max,MacBook Pro Air,Galaxy S24,Pixel 7"
 https://www.amazon.com/dp/B0F6SRN24Y
+
+<a href="./images/AMAKE.jpg">
+  <img src="./images/AMAKE.jpg" alt="Screenshot" width="300">
+</a>
+
 
 *NOT Recommended* - Works on pi400 BUT pi500+ complains the (fully compliant) 45 watt USB C power adapter cannot provide a full 5 watts. It appears this adpater drops a fair amount of power during pass-through, so although it works as a keyboard/mouse splitter, it isn't recommended.
 
