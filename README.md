@@ -8,7 +8,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 ## Changes from Original C Version
 
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
-2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`MOGOOD.jpg
+2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can be overridden at run time
 4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
 5. **Improved error handling** - Better error messages & graceful cleanup
