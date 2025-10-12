@@ -261,7 +261,7 @@ chmod +x my-py400kb.sh
 RECOMMENDED - Working on pi400 and pi500+: (as mentioned above) "AMAKE USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging,Suitable for iPhone 15/15 Pro Max,MacBook Pro Air,Galaxy S24,Pixel 7"
 https://www.amazon.com/dp/B0F6SRN24Y
 
-<font color="red">Not Recommended</font> - Works on pi400 BUT pi500+ complains the (fully compliant) 45 watt USB C power adapter cannot provide a full 5 watts. It appears this adpater drops a fair amount of power during pass-through, so although it works as a keyboard/mouse splitter, it isn't recommended.
+*NOT Recommended* - Works on pi400 BUT pi500+ complains the (fully compliant) 45 watt USB C power adapter cannot provide a full 5 watts. It appears this adpater drops a fair amount of power during pass-through, so although it works as a keyboard/mouse splitter, it isn't recommended.
 
 "MOGOOD USB C Splitter Type C Y Splitter Cable(NOT for Monitor) C Male to 2USB-C Female Cord (Charging Split NOT Supported) Double USB C Port Hub for Mac,Xbox One,PS5,Quest3"
 
