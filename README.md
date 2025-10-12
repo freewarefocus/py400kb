@@ -254,6 +254,7 @@ chmod +x my-py400kb.sh
 **RECOMMENDED USB C to OTG Splitters**
 
 RECOMMENDED - Working on pi400 and pi500+: (as mentioned above) "AMAKE USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging,Suitable for iPhone 15/15 Pro Max,MacBook Pro Air,Galaxy S24,Pixel 7"
+
 https://www.amazon.com/dp/B0F6SRN24Y
 
 <a href="./images/AMAKE.jpg">
