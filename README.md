@@ -8,7 +8,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 ## Changes from Original C Version
 
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
-2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
+2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`MOGOOD.jpg
 3. **Added parameter overrides** - All VID/PID/device paths can be overridden at run time
 4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
 5. **Improved error handling** - Better error messages & graceful cleanup
@@ -34,7 +34,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 - The **ONLY** port on the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can be used as a HID device is the USB C power port.
   Since the destination PC's USB ports can't provide enough power to run any of these, **you will need a USB C power & data splitter**.
 
-  I used this model from Amazon, although I am sure several others could work and are available from other retailers. Make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
+  I used this model from Amazon, although I am sure other models from other retailers could work too. (see hardware section below). If searching for your own adapater make sure you look for a "USB C to OTG" adapter that is designed for 20+ watts.
   
   This model has a USB C female connector to accept power from a Raspberry Pi 400/500 compatible power adapter and a separate USB A female port, which passes data to & from the Pi's USB C port. You will need a male to male USB A cable or an male A to male C cable to go from the splitter to your destination PC. Make sure this cable is capable of passing USB data and isn't just a charging cable.
   
@@ -44,6 +44,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 <a href="./images/AMAKE.jpg">
   <img src="./images/AMAKE.jpg" alt="Screenshot" width="300">
 </a>
+
 
   For the USB A to A cable, I used this model (again, many brands and vendors should work): 
   
@@ -264,10 +265,12 @@ Not Recommended - Works on pi400 BUT pi500+ complains the (fully compliant) 45 w
 
 "MOGOOD USB C Splitter Type C Y Splitter Cable(NOT for Monitor) C Male to 2USB-C Female Cord (Charging Split NOT Supported) Double USB C Port Hub for Mac,Xbox One,PS5,Quest3"
 
-https://www.amazon.com/dp/B0CB3M46Y5?
+https://www.amazon.com/dp/B0CB3M46Y5
+
 <a href="./images/MOGOOD.jpg">
   <img src="./images/MOGOOD.jpg" alt="Screenshot" width="300">
 </a>
+
 
 ## Troubleshooting
 
