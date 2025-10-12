@@ -41,6 +41,8 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
   Amake USB C to USB OTG Adapter,2-in-1 USB-C Distributor,100W Fast Charging: 
   www.amazon.com/dp/B0F6SRN24Y
 
+  ![Screenshot](./images/AMAKE.jpg)
+
   For the USB A to A cable, I used this model (again, many brands and vendors should work): 
   
   SB 3.0 Male to Male Cable 3Ft, USB to USB Cable with Gold-Plated Connector
