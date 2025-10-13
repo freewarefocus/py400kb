@@ -4,7 +4,7 @@ This project is a Python rewrite of the C project pi400kb by Gadgetoid (https://
 The goal was to remove some legacy features no longer found in the Pi 500 & 500+ and add the ability to define a custom keyboard or mouse without having to recompile. Hence, after a complete Python re-write pi400kb became py400kb.
 
 This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a keyboard & mouse for another computer. You can use a handy preset for the pi400, 500 or 500+ and the official Raspberry Pi Mouse or pass in custom values for the keyboard & mouse to support newer models or custom hardware. It also supports recording and playing back keyboard and mouse macro files.
-
+typed
 ## Changes from Original C Version
 
 1. **Removed hook.sh call** - The LED toggle script is no longer called (that LED doesn't exist under newer Pix00 models)
@@ -28,7 +28,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 
 ## Requirements
 
-- Python 3.6 or later (should be installed on Raspbery Pi OS by default)
+- Python 3.6 or later (should be installed on Raspberry Pi OS by default)
 - Root access (required for USB gadget and device grabbing)
 - Raspberry Pi with USB C gadget mode support (currently the Pi 4, Pi 5, Pi 400, Pi 500 & Pi 500+)
 - The **ONLY** port on the Pi4, Pi5, Pi400, Pi500 & Pi500+ that can be used as a HID device is the USB C power port.
