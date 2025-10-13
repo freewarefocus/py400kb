@@ -26,6 +26,12 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 - The --record-macro {filename} and --play-macro {filename} allow you to record a keyboard & mouse session and then play it back exactly as it occurred once again. Since an offset timestamp is stored in the file your key presses and mouse moves & clicks will be repeated at the same speed as you originally did them
 - Advanced Use: The ability to spoof other keyboards using the --spoof-kb- VID, PID, REV command line options. This does NOT change how the Pi's keyboard is configured or operates; it simply tells the destination PC that you are using a different keyboard than you actually are. If you don't know why you would ever need to do that, then ignore these options - these are not the droids you are looking for.
 
+## Not Supported
+From my limited testing (see the Hardware section below) these are likely to not work:
+- Any "wireless" or "wireless dongle" style mouse & keyboards
+- Gaming mice with extra buttons
+- Pis earlier than the Pi4. The program is built around the USB C port on the 4 & 5 generation of Pis
+
 ## Requirements
 
 - Python 3.6 or later (should be installed on Raspberry Pi OS by default)
