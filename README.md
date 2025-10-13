@@ -11,7 +11,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 2. **Added command-line model selection** - `--pi400`, `--pi500`, `--pi500plus`
 3. **Added parameter overrides** - All VID/PID/device paths can be overridden at run time
 4. **Pure Python implementation** - No need for cmake or compilation & no Python libraries need to be added
-5. **Improved error handling** - Better error messages & graceful cleanup
+5. **Improved error handling** - Better error messages & graceful cleanuptyped
 6. **More feedback** - Added additonal status messages and a --help command line option
 7. **Added Macro Record/Playback** - Now supports recording and playing back keyboard and mouse sessions
 
@@ -23,7 +23,7 @@ This program allows a Raspberry pi4, pi5, pi400, pi500 or pi500+ to act as a key
 - Exit with Ctrl+Shift+Raspberry key
 - Command-line overrides for all device parameters for custom mice & keyboards
 - The raw keyboard & mouse inputs are shown in the terminal window (K: 00 00 00 00 00 00 00 00 or M: 00 00 00 00). NOTE: This output can be hidden with the --hide-events command line option
-- The --record-macro {filename} and --play-macro {filename} allow you to record a keyboard & mouse session and then play it back exactly as it occurred once again
+- The --record-macro {filename} and --play-macro {filename} allow you to record a keyboard & mouse session and then play it back exactly as it occurred once again. Since an offset timestamp is stored in the file your key presses and mouse moves & clicks will be repeated at the same speed as you originally did them
 - Advanced Use: The ability to spoof other keyboards using the --spoof-kb- VID, PID, REV command line options. This does NOT change how the Pi's keyboard is configured or operates; it simply tells the destination PC that you are using a different keyboard than you actually are. If you don't know why you would ever need to do that, then ignore these options - these are not the droids you are looking for.
 
 ## Requirements
